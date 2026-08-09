@@ -426,34 +426,64 @@
     text-align: center;
   }
 
-  /* pipeline stages card */
-  .pipeline-stages { display: flex; flex-direction: column; gap: 10px; }
-  .stage-row {
+  /* ROAS calculator card */
+  .calc-card { display: flex; flex-direction: column; gap: 18px; }
+  .calc-row { display: flex; flex-direction: column; gap: 8px; }
+  .calc-row-top { display: flex; align-items: center; justify-content: space-between; }
+  .calc-row-top label { font-size: 13px; font-weight: 600; color: var(--ink-dim); }
+  .calc-value { font-family: var(--mono); font-size: 13px; color: var(--gold); }
+  .calc-row input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background: rgba(245,243,236,0.12);
+    outline: none;
+  }
+  .calc-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px var(--gold-soft);
+    cursor: pointer;
+  }
+  .calc-row input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px var(--gold-soft);
+    cursor: pointer;
+  }
+  .calc-roas {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: 10px;
+    padding: 16px 18px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+  }
+  .calc-roas-num { font-family: var(--serif); font-style: italic; font-size: 34px; color: var(--gold); }
+  .calc-roas-label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); }
+  .calc-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .calc-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     background: var(--bg-raised);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 14px;
+    border-radius: 10px;
+    padding: 10px 12px;
   }
-  .stage-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-  .stage-row:nth-child(1) .stage-dot { background: var(--ink-faint); }
-  .stage-row:nth-child(2) .stage-dot { background: var(--green); }
-  .stage-row:nth-child(3) .stage-dot { background: var(--gold); }
-  .stage-row:nth-child(4) .stage-dot { background: #E8763A; }
-  .stage-name { font-weight: 700; font-size: 13.5px; }
-  .stage-bar { flex: 1; height: 6px; background: rgba(245,243,236,0.08); border-radius: 4px; overflow: hidden; }
-  .stage-bar-fill { display: block; height: 100%; border-radius: 4px; width: 0; transition: width 1.4s cubic-bezier(.16,.84,.44,1); }
-  .stage-row:nth-child(1) .stage-bar-fill { background: var(--ink-faint); transition-delay: 0.05s; }
-  .stage-row:nth-child(2) .stage-bar-fill { background: var(--green); transition-delay: 0.15s; }
-  .stage-row:nth-child(3) .stage-bar-fill { background: var(--gold); transition-delay: 0.25s; }
-  .stage-row:nth-child(4) .stage-bar-fill { background: #E8763A; transition-delay: 0.35s; }
-  .hero-cards.is-visible .stage-row:nth-child(1) .stage-bar-fill { width: 92%; }
-  .hero-cards.is-visible .stage-row:nth-child(2) .stage-bar-fill { width: 68%; }
-  .hero-cards.is-visible .stage-row:nth-child(3) .stage-bar-fill { width: 41%; }
-  .hero-cards.is-visible .stage-row:nth-child(4) .stage-bar-fill { width: 22%; }
-  .stage-count { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); width: 30px; text-align: right; }
+  .calc-stat-num { font-family: var(--mono); font-weight: 600; font-size: 17px; color: var(--ink); }
+  .calc-stat-label { font-size: 11px; color: var(--ink-faint); }
+  .calc-assumptions { font-family: var(--mono); font-size: 10.5px; line-height: 1.6; color: var(--ink-faint); margin: 0; }
 
   /* ===== REAL COST ===== */
   .cost-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -904,34 +934,50 @@
         </div>
       </div>
 
-      <div class="preview-card">
-        <div class="card-label">Pipeline Status <span class="live-badge"><span class="live-dot"></span>Live</span></div>
-        <div class="pipeline-stages">
-          <div class="stage-row">
-            <span class="stage-dot"></span>
-            <span class="stage-name">Captured</span>
-            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
-            <span class="stage-count">184</span>
+      <div class="preview-card calc-card">
+        <div class="card-label">ROAS Calculator <span class="card-tag">Estimate</span></div>
+
+        <div class="calc-row">
+          <div class="calc-row-top">
+            <label for="calc-spend">Monthly ad spend</label>
+            <span class="calc-value" id="calc-spend-val">$8,000</span>
           </div>
-          <div class="stage-row">
-            <span class="stage-dot"></span>
-            <span class="stage-name">Qualified</span>
-            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
-            <span class="stage-count">96</span>
+          <input type="range" id="calc-spend" min="1000" max="30000" step="500" value="8000">
+        </div>
+
+        <div class="calc-row">
+          <div class="calc-row-top">
+            <label for="calc-team">Team size</label>
+            <span class="calc-value" id="calc-team-val">5 agents</span>
           </div>
-          <div class="stage-row">
-            <span class="stage-dot"></span>
-            <span class="stage-name">Booked</span>
-            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
-            <span class="stage-count">42</span>
+          <input type="range" id="calc-team" min="1" max="20" step="1" value="5">
+        </div>
+
+        <div class="calc-roas">
+          <span class="calc-roas-num" id="calc-roas-val">8.0X</span>
+          <span class="calc-roas-label">estimated ROAS</span>
+        </div>
+
+        <div class="calc-stats-grid">
+          <div class="calc-stat">
+            <span class="calc-stat-num" id="calc-leads-val">178</span>
+            <span class="calc-stat-label">qualified leads/mo</span>
           </div>
-          <div class="stage-row">
-            <span class="stage-dot"></span>
-            <span class="stage-name">Closed</span>
-            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
-            <span class="stage-count">17</span>
+          <div class="calc-stat">
+            <span class="calc-stat-num" id="calc-transfers-val">24</span>
+            <span class="calc-stat-label">live transfers/mo</span>
+          </div>
+          <div class="calc-stat">
+            <span class="calc-stat-num" id="calc-deals-val">7</span>
+            <span class="calc-stat-label">est. closed deals</span>
+          </div>
+          <div class="calc-stat">
+            <span class="calc-stat-num" id="calc-peragent-val">4.7</span>
+            <span class="calc-stat-label">transfers/agent</span>
           </div>
         </div>
+
+        <p class="calc-assumptions">Assumes $40–50 per qualified lead, $338 per live transfer, a 30% close rate, and $9,000 average commission per closed deal. Estimate only — actual results vary by market and team.</p>
       </div>
     </div>
   </div>
@@ -1086,7 +1132,7 @@
 
     <div class="results-grid reveal-stagger">
       <div class="stat-card">
-        <div class="stat-num">5X</div>
+        <div class="stat-num">8X</div>
         <div class="stat-desc">expected ROAS for teams</div>
       </div>
       <div class="stat-card">
@@ -1351,6 +1397,42 @@
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   spySections.forEach(s => navObserver.observe(s));
+
+  // ROAS calculator
+  (function () {
+    const spendInput = document.getElementById('calc-spend');
+    const teamInput = document.getElementById('calc-team');
+    if (!spendInput || !teamInput) return;
+
+    const CPL_AVG = 45;
+    const COST_PER_TRANSFER = 338;
+    const CLOSE_RATE = 0.30;
+    const AVG_COMMISSION = 9000;
+
+    function update() {
+      const spend = parseInt(spendInput.value, 10);
+      const team = parseInt(teamInput.value, 10);
+
+      const leads = spend / CPL_AVG;
+      const transfers = spend / COST_PER_TRANSFER;
+      const deals = transfers * CLOSE_RATE;
+      const revenue = deals * AVG_COMMISSION;
+      const roas = revenue / spend;
+      const perAgent = transfers / team;
+
+      document.getElementById('calc-spend-val').textContent = '$' + spend.toLocaleString();
+      document.getElementById('calc-team-val').textContent = team + (team === 1 ? ' agent' : ' agents');
+      document.getElementById('calc-roas-val').textContent = roas.toFixed(1) + 'X';
+      document.getElementById('calc-leads-val').textContent = Math.round(leads).toLocaleString();
+      document.getElementById('calc-transfers-val').textContent = Math.round(transfers).toLocaleString();
+      document.getElementById('calc-deals-val').textContent = Math.round(deals).toLocaleString();
+      document.getElementById('calc-peragent-val').textContent = perAgent.toFixed(1);
+    }
+
+    spendInput.addEventListener('input', update);
+    teamInput.addEventListener('input', update);
+    update();
+  })();
 </script>
 
 </body>
