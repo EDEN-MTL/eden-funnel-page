@@ -592,17 +592,6 @@
   .credibility blockquote i { color: var(--gold); }
 
   /* ===== RESULTS ===== */
-  .results-note {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink-faint);
-    background: var(--bg-raised);
-    border: 1px dashed var(--border-strong);
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin-bottom: 36px;
-    max-width: 680px;
-  }
   .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   @media (max-width: 880px) { .results-grid { grid-template-columns: 1fr; } }
   .stat-card {
@@ -612,18 +601,6 @@
     padding: 32px 28px;
     position: relative;
   }
-  .stat-card .placeholder-tag {
-    position: absolute;
-    top: 18px; right: 18px;
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: var(--gold-soft);
-    padding: 4px 8px;
-    border-radius: 6px;
-  }
   .stat-card .stat-num {
     font-family: var(--serif);
     font-style: italic;
@@ -632,6 +609,12 @@
     margin-bottom: 10px;
   }
   .stat-card .stat-desc { color: var(--ink-dim); font-size: 14.5px; line-height: 1.5; }
+  .stat-card .stat-attribution {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 12px;
+  }
 
   /* ===== BONUS ===== */
   .bonus-banner {
@@ -1101,26 +1084,19 @@
       <h2>What the process produces</h2>
     </div>
 
-    <!-- PLACEHOLDER NOTICE: Do not publish these numbers as real. Replace with actual case study data before launch. -->
-    <div class="results-note reveal">
-      ⚠ PLACEHOLDER DATA — these stat cards are structural mockups only. Replace [XX] values with confirmed case study numbers before this page goes live. Do not attribute AI-only results to periods run by a human team — attribute historical results to "the process, now AI-run."
-    </div>
-
     <div class="results-grid reveal-stagger">
       <div class="stat-card">
-        <span class="placeholder-tag">Placeholder</span>
-        <div class="stat-num">[XX]</div>
-        <div class="stat-desc">leads reactivated from dead CRM records</div>
+        <div class="stat-num">5X</div>
+        <div class="stat-desc">expected ROAS for teams</div>
       </div>
       <div class="stat-card">
-        <span class="placeholder-tag">Placeholder</span>
-        <div class="stat-num">[XX]</div>
-        <div class="stat-desc">appointments booked in [XX] days</div>
+        <div class="stat-num">400</div>
+        <div class="stat-desc">qualified leads transferred in 30 days</div>
+        <div class="stat-attribution">Result from the process, now AI-run.</div>
       </div>
       <div class="stat-card">
-        <span class="placeholder-tag">Placeholder</span>
-        <div class="stat-num">[XX]%</div>
-        <div class="stat-desc">improvement in [metric — e.g. response time]</div>
+        <div class="stat-num">10 sec</div>
+        <div class="stat-desc">new leads contacted, day or night</div>
       </div>
     </div>
   </div>
