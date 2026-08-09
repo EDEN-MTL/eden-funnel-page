@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden — Consistent, Qualified Clients for Real Estate Teams & Brokerages</title>
+<meta name="description" content="Eden is the AI-run system that turns your brokerage's leads into consistent, qualified clients — without paying separate agencies for leads that never close.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0A0B08;
+    --bg-raised: #101208;
+    --bg-card: #14160F;
+    --border: rgba(245, 243, 236, 0.09);
+    --border-strong: rgba(245, 243, 236, 0.16);
+    --gold: #D6A544;
+    --gold-soft: rgba(214, 165, 68, 0.12);
+    --green: #4A7A5A;
+    --green-soft: rgba(74, 122, 90, 0.14);
+    --ink: #F5F3EC;
+    --ink-dim: rgba(245, 243, 236, 0.64);
+    --ink-faint: rgba(245, 243, 236, 0.4);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --container: 1180px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(214,165,68,0.14), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 10%, rgba(74,122,90,0.14), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(245,243,236,0.07) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black 30%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black 30%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  em, .italic { font-style: italic; }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  h2 {
+    font-size: clamp(32px, 4.2vw, 48px);
+    margin-top: 16px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(214,165,68,0.32);
+    background: rgba(214,165,68,0.07);
+    padding: 7px 14px 7px 11px;
+    border-radius: 999px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(214,165,68,0.5);
+    animation: eyebrow-pulse 2s infinite;
+  }
+
+  @keyframes eyebrow-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(214,165,68,0.45); }
+    70% { box-shadow: 0 0 0 6px rgba(214,165,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(214,165,68,0); }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    white-space: nowrap;
+  }
+  .btn-arrow { display: inline-block; transition: transform 0.25s cubic-bezier(.2,.8,.2,1); }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+  .btn-primary {
+    background: var(--gold);
+    color: #17140A;
+    box-shadow: 0 8px 26px -12px rgba(214,165,68,0.6);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px -10px rgba(214,165,68,0.7);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .btn-sm { padding: 10px 20px; font-size: 13px; }
+
+  /* Announcement bar */
+  .announce {
+    background: linear-gradient(90deg, rgba(214,165,68,0.14), rgba(74,122,90,0.14));
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    position: relative;
+    z-index: 100;
+  }
+  .announce a { color: var(--gold); border-bottom: 1px solid rgba(214,165,68,0.4); padding-bottom: 1px; }
+  .announce a:hover { border-color: var(--gold); }
+
+  /* Nav */
+  header.nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    padding: 18px 0;
+    background: rgba(10,11,8,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+  }
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+  footer .logo-mark { width: 40px; height: 40px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px;
+  }
+  .nav-links a {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-dim);
+    padding: 9px 16px;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--ink); background: rgba(245,243,236,0.06); }
+  .nav-links a.active { color: var(--gold); background: rgba(214,165,68,0.1); }
+  .nav-cta { display: flex; }
+
+  /* Scroll progress */
+  #scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* Spotlight glow (mouse-tracked) shared by card types */
+  .preview-card, .cost-card, .sys-card, .stat-card, .fit-card {
+    position: relative;
+    isolation: isolate;
+  }
+  .preview-card::after, .cost-card::after, .sys-card::after, .stat-card::after, .fit-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(214,165,68,0.14), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .preview-card:hover::after, .cost-card:hover::after, .sys-card:hover::after, .stat-card:hover::after, .fit-card:hover::after {
+    opacity: 1;
+  }
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+  }
+
+  section { position: relative; z-index: 1; padding: 100px 0; }
+  @media (max-width: 720px) { section { padding: 64px 0; } }
+
+  .section-head { max-width: 680px; margin-bottom: 56px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head p { font-size: 17px; color: var(--ink-dim); margin-top: 16px; line-height: 1.6; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+  .reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.02s; }
+  .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.10s; }
+  .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.18s; }
+  .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+  .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.34s; }
+  .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.42s; }
+
+  /* ===== HERO ===== */
+  .hero { padding-top: 92px; padding-bottom: 60px; }
+  .hero-inner { max-width: 780px; }
+  .hero h1 {
+    font-size: clamp(40px, 6.4vw, 74px);
+    margin-top: 22px;
+  }
+  .hero h1 i { color: var(--gold); text-shadow: 0 0 50px rgba(214,165,68,0.4); }
+  .hero p.sub {
+    font-size: 19px;
+    color: var(--ink-dim);
+    max-width: 620px;
+    margin-top: 24px;
+    line-height: 1.65;
+  }
+  .hero-ctas { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+
+  .hero-cards {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+  }
+  @media (max-width: 860px) { .hero-cards { grid-template-columns: 1fr; } }
+
+  .preview-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(214,165,68,0.55), transparent);
+  }
+  .preview-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-strong);
+    box-shadow: 0 24px 60px -20px rgba(214,165,68,0.2), 0 24px 60px -20px rgba(0,0,0,0.6);
+  }
+  .preview-card .card-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-soft);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: live-pulse 1.8s infinite;
+  }
+  @keyframes live-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(74,122,90,0.55); }
+    70% { box-shadow: 0 0 0 7px rgba(74,122,90,0); }
+    100% { box-shadow: 0 0 0 0 rgba(74,122,90,0); }
+  }
+
+  /* sources -> eden -> dashboard diagram */
+  .flow-diagram { display: flex; align-items: center; gap: 10px; }
+  .flow-col { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .flow-chip {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--ink-dim);
+  }
+  .flow-arrow { color: var(--ink-faint); font-size: 18px; flex-shrink: 0; }
+  .flow-hub {
+    position: relative;
+    flex-shrink: 0;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold), #a87c2c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: #17140A;
+    box-shadow: 0 0 0 6px var(--gold-soft);
+  }
+  .flow-hub::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(214,165,68,0.5);
+    animation: hub-pulse 2.4s ease-out infinite;
+  }
+  @keyframes hub-pulse {
+    0% { transform: scale(0.92); opacity: 0.9; }
+    100% { transform: scale(1.45); opacity: 0; }
+  }
+  .flow-out {
+    flex-shrink: 0;
+    background: var(--bg-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  /* pipeline stages card */
+  .pipeline-stages { display: flex; flex-direction: column; gap: 10px; }
+  .stage-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .stage-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .stage-row:nth-child(1) .stage-dot { background: var(--ink-faint); }
+  .stage-row:nth-child(2) .stage-dot { background: var(--green); }
+  .stage-row:nth-child(3) .stage-dot { background: var(--gold); }
+  .stage-row:nth-child(4) .stage-dot { background: #E8763A; }
+  .stage-name { font-weight: 700; font-size: 13.5px; }
+  .stage-bar { flex: 1; height: 6px; background: rgba(245,243,236,0.08); border-radius: 4px; overflow: hidden; }
+  .stage-bar-fill { display: block; height: 100%; border-radius: 4px; width: 0; transition: width 1.4s cubic-bezier(.16,.84,.44,1); }
+  .stage-row:nth-child(1) .stage-bar-fill { background: var(--ink-faint); transition-delay: 0.05s; }
+  .stage-row:nth-child(2) .stage-bar-fill { background: var(--green); transition-delay: 0.15s; }
+  .stage-row:nth-child(3) .stage-bar-fill { background: var(--gold); transition-delay: 0.25s; }
+  .stage-row:nth-child(4) .stage-bar-fill { background: #E8763A; transition-delay: 0.35s; }
+  .hero-cards.is-visible .stage-row:nth-child(1) .stage-bar-fill { width: 92%; }
+  .hero-cards.is-visible .stage-row:nth-child(2) .stage-bar-fill { width: 68%; }
+  .hero-cards.is-visible .stage-row:nth-child(3) .stage-bar-fill { width: 41%; }
+  .hero-cards.is-visible .stage-row:nth-child(4) .stage-bar-fill { width: 22%; }
+  .stage-count { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); width: 30px; text-align: right; }
+
+  /* ===== REAL COST ===== */
+  .cost-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 880px) { .cost-grid { grid-template-columns: 1fr; } }
+  .cost-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px 26px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .cost-card:hover { transform: translateY(-4px); border-color: rgba(232,118,58,0.35); box-shadow: 0 20px 50px -26px rgba(232,118,58,0.3); }
+  .cost-card .x-mark {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(232,118,58,0.12);
+    color: #E8763A;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+  .cost-card h3 { font-family: var(--sans); font-style: normal; font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+  .cost-card p { color: var(--ink-dim); font-size: 14.5px; line-height: 1.6; }
+  .close-line {
+    margin-top: 48px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--ink);
+    text-align: center;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+  }
+  .close-line .accent { color: var(--gold); }
+
+  /* ===== COMPARISON TABLE ===== */
+  .compare-table {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:not(.head):hover {
+    background: rgba(214,165,68,0.05);
+    box-shadow: inset 3px 0 0 var(--gold);
+  }
+  .compare-row:not(.head):hover .compare-cell.label { color: var(--gold); }
+  .compare-row.head {
+    background: var(--bg-raised);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .compare-cell { padding: 20px 24px; font-size: 14.5px; display: flex; align-items: center; gap: 10px; }
+  .compare-row.head .compare-cell { padding: 14px 24px; }
+  .compare-cell.label { font-weight: 700; color: var(--ink); }
+  .compare-cell.old { color: var(--ink-faint); }
+  .compare-cell.old .mark { color: #E8763A; }
+  .compare-cell.new .mark { color: var(--green); }
+  .mark { font-family: var(--mono); flex-shrink: 0; }
+  @media (max-width: 720px) {
+    .compare-row { grid-template-columns: 1fr; }
+    .compare-cell { padding: 12px 20px; }
+    .compare-row.head { display: none; }
+    .compare-cell.label { padding-top: 20px; background: var(--bg-raised); }
+  }
+
+  /* ===== SYSTEM CARDS ===== */
+  .system-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 960px) { .system-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .system-grid { grid-template-columns: 1fr; } }
+  .sys-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 24px;
+    transition: transform 0.3s cubic-bezier(.2,.8,.2,1), border-color 0.3s ease, background 0.3s ease;
+  }
+  .sys-card:hover { transform: translateY(-5px); border-color: var(--gold); background: var(--bg-raised); box-shadow: 0 20px 50px -26px rgba(214,165,68,0.35); }
+  .sys-card .num { font-family: var(--mono); font-size: 12px; color: var(--gold); margin-bottom: 16px; }
+  .sys-card h3 { font-family: var(--sans); font-weight: 800; font-size: 17.5px; margin-bottom: 10px; }
+  .sys-card p { color: var(--ink-dim); font-size: 14px; line-height: 1.6; }
+  .system-close {
+    margin-top: 44px;
+    text-align: center;
+    color: var(--ink-dim);
+    font-size: 16px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  .system-close strong { color: var(--ink); font-weight: 700; }
+
+  /* ===== WHY THIS WORKS ===== */
+  .credibility {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 56px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 780px) { .credibility { flex-direction: column; padding: 36px 26px; text-align: center; } }
+  .credibility .mark-icon {
+    flex-shrink: 0;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 30px;
+    color: var(--green);
+  }
+  .credibility blockquote {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .credibility blockquote i { color: var(--gold); }
+
+  /* ===== RESULTS ===== */
+  .results-note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    background: var(--bg-raised);
+    border: 1px dashed var(--border-strong);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 36px;
+    max-width: 680px;
+  }
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 880px) { .results-grid { grid-template-columns: 1fr; } }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 28px;
+    position: relative;
+  }
+  .stat-card .placeholder-tag {
+    position: absolute;
+    top: 18px; right: 18px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-soft);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .stat-card .stat-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 44px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .stat-card .stat-desc { color: var(--ink-dim); font-size: 14.5px; line-height: 1.5; }
+
+  /* ===== BONUS ===== */
+  .bonus-banner {
+    background: linear-gradient(120deg, var(--green-soft), var(--gold-soft));
+    border: 1px solid var(--border-strong);
+    border-radius: 22px;
+    padding: 44px 48px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  @media (max-width: 720px) { .bonus-banner { flex-direction: column; text-align: center; padding: 34px 26px; } }
+  .bonus-banner .bonus-icon {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(74,122,90,0.16);
+    border: 1px solid rgba(74,122,90,0.4);
+    border-radius: 999px;
+    padding: 8px 16px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .bonus-banner p {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2.4vw, 24px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .bonus-banner .num-14 { color: var(--gold); font-style: italic; }
+  .bonus-banner + .bonus-banner { margin-top: 20px; }
+
+  /* ===== GUARANTEE ===== */
+  .guarantee-banner {
+    background: linear-gradient(120deg, var(--gold-soft), var(--green-soft));
+    border: 1px solid rgba(214,165,68,0.4);
+    border-radius: 22px;
+    padding: 44px 48px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 30px 70px -44px rgba(214,165,68,0.4);
+  }
+  @media (max-width: 720px) { .guarantee-banner { flex-direction: column; text-align: center; padding: 34px 26px; } }
+  .guarantee-banner .guarantee-icon {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(214,165,68,0.16);
+    border: 1px solid rgba(214,165,68,0.45);
+    border-radius: 999px;
+    padding: 8px 16px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .guarantee-copy { display: flex; flex-direction: column; gap: 10px; }
+  .guarantee-banner p {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2.4vw, 24px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .guarantee-banner .num-30 { color: var(--gold); font-style: italic; }
+  .guarantee-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== MARQUEE ===== */
+  .marquee-section { padding: 56px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .marquee-track-wrap { overflow: hidden; position: relative; }
+  .marquee-track-wrap::before, .marquee-track-wrap::after {
+    content: '';
+    position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2;
+  }
+  .marquee-track-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+  .marquee-track-wrap::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+  .marquee-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee-track-wrap:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-chip {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--ink-dim);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 12px 22px;
+    white-space: nowrap;
+    transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .marquee-chip:hover {
+    border-color: var(--gold);
+    color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -16px rgba(214,165,68,0.5);
+  }
+
+  /* ===== WHO THIS IS FOR ===== */
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 780px) { .fit-grid { grid-template-columns: 1fr; } }
+  .fit-card {
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid var(--border);
+  }
+  .fit-card.yes { background: var(--green-soft); border-color: rgba(74,122,90,0.35); }
+  .fit-card.no { background: var(--bg-card); }
+  .fit-card h3 { font-family: var(--sans); font-weight: 800; font-size: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .fit-card ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .fit-card li { display: flex; gap: 12px; font-size: 14.5px; line-height: 1.5; color: var(--ink-dim); }
+  .fit-card.yes li .mark { color: var(--green); }
+  .fit-card.no li .mark { color: var(--ink-faint); }
+
+  /* ===== WHY NOW ===== */
+  .why-now {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .why-now p {
+    color: var(--ink-dim);
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ===== AVAILABILITY ===== */
+  .availability {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .avail-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 14px 28px;
+    margin-top: 28px;
+  }
+  .avail-count .n { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--gold); }
+  .avail-count .t { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); text-align: left; line-height: 1.4; }
+  .avail-count { box-shadow: 0 0 40px -14px rgba(214,165,68,0.4); }
+
+  /* ===== FAQ ===== */
+  .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 780px; }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .faq-item:hover { border-color: var(--border-strong); }
+  .faq-item.open { border-color: rgba(214,165,68,0.4); box-shadow: 0 16px 40px -22px rgba(214,165,68,0.4); }
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 26px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15.5px;
+    transition: color 0.25s ease;
+  }
+  .faq-item.open .faq-q { color: var(--gold); }
+  .faq-q .plus { font-family: var(--mono); color: var(--gold); font-size: 20px; transition: transform 0.3s ease; flex-shrink: 0; }
+  .faq-item.open .faq-q .plus { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 26px;
+    color: var(--ink-dim);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .faq-item.open .faq-a { max-height: 240px; padding: 0 26px 24px; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 28px;
+    padding: 64px 48px;
+    text-align: center;
+  }
+  .final-cta p { color: var(--ink-dim); margin-top: 16px; font-size: 17px; }
+  .calendar-embed-wrap {
+    margin: 40px auto 0;
+    max-width: 640px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .calendar-embed-wrap iframe { display: block; min-height: 850px; }
+  @media (max-width: 560px) {
+    .calendar-embed-wrap iframe { min-height: 1050px; }
+  }
+
+  /* ===== FOOTER ===== */
+  footer { border-top: 1px solid var(--border); padding: 56px 0 40px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+  .footer-tagline { color: var(--ink-faint); font-size: 13.5px; max-width: 320px; margin-top: 10px; }
+  .footer-right { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); text-align: right; }
+
+  ::selection { background: var(--gold); color: #17140A; }
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+
+<!-- 1. ANNOUNCEMENT BAR -->
+<div class="announce">
+  Building 3 new systems this month, by hand — <a href="#final-cta">see if you're a fit</a>
+</div>
+
+<!-- NAV -->
+<header class="nav-wrap">
+  <div class="wrap">
+    <nav>
+      <div class="logo">
+        <img class="logo-mark" src="eden-logo.png" alt="Eden">
+        <span>Eden</span>
+      </div>
+      <div class="nav-links">
+        <a href="#system">The System</a>
+        <a href="#results">Results</a>
+        <a href="#fit">Who It's For</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#final-cta" class="btn btn-primary btn-sm">Book your audit <span class="btn-arrow">→</span></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- 2. HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner reveal">
+      <span class="eyebrow">AI-run client acquisition for real estate teams &amp; brokerages</span>
+      <h1>Consistent, <i>qualified clients</i> — not just more leads.</h1>
+      <p class="sub">Stop paying marketing agencies and lead gen companies by the lead. Eden is the AI-run system that turns your brokerage's pipeline into consistent, qualified appointments — without adding another vendor.</p>
+      <div class="hero-ctas">
+        <a href="#final-cta" class="btn btn-primary">Book your pipeline audit <span class="btn-arrow">→</span></a>
+        <a href="#system" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+
+    <div class="hero-cards reveal-stagger">
+      <div class="preview-card">
+        <div class="card-label">Unified Intake <span class="card-tag">AI-run</span></div>
+        <div class="flow-diagram">
+          <div class="flow-col">
+            <div class="flow-chip">Zillow</div>
+            <div class="flow-chip">Meta Ads</div>
+            <div class="flow-chip">Website</div>
+            <div class="flow-chip">Referrals</div>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-hub">Eden</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-out">One<br>Dashboard</div>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="card-label">Pipeline Status <span class="live-badge"><span class="live-dot"></span>Live</span></div>
+        <div class="pipeline-stages">
+          <div class="stage-row">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Captured</span>
+            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
+            <span class="stage-count">184</span>
+          </div>
+          <div class="stage-row">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Qualified</span>
+            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
+            <span class="stage-count">96</span>
+          </div>
+          <div class="stage-row">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Booked</span>
+            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
+            <span class="stage-count">42</span>
+          </div>
+          <div class="stage-row">
+            <span class="stage-dot"></span>
+            <span class="stage-name">Closed</span>
+            <span class="stage-bar"><span class="stage-bar-fill"></span></span>
+            <span class="stage-count">17</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. THE REAL COST -->
+<section id="cost">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The real cost</span>
+      <h2>You've tried the leads. You've tried the training. You've tried the content. It's still not working.</h2>
+    </div>
+
+    <div class="cost-grid reveal-stagger">
+      <div class="cost-card">
+        <div class="x-mark">✗</div>
+        <h3>Bought more leads</h3>
+        <p>Zillow, Realtor.com, purchased lists. More contacts in the CRM — same chaos in how they're worked.</p>
+      </div>
+      <div class="cost-card">
+        <div class="x-mark">✗</div>
+        <h3>Trained the team</h3>
+        <p>Scripts, coaching, accountability calls. Agents still get to the lead late, if they get to it at all.</p>
+      </div>
+      <div class="cost-card">
+        <div class="x-mark">✗</div>
+        <h3>Made more content</h3>
+        <p>More campaigns, more posts, more spend. Still no straight line from a video view to a booked appointment.</p>
+      </div>
+    </div>
+
+    <p class="close-line reveal">Each one did its job. None of them were ever built to talk to each other — and that's the actual reason it never became <span class="accent">consistent.</span></p>
+  </div>
+</section>
+
+<!-- 4. WHY EDEN -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why Eden</span>
+      <h2>The old way vs. the Eden way</h2>
+    </div>
+
+    <div class="compare-table reveal">
+      <div class="compare-row head">
+        <div class="compare-cell"></div>
+        <div class="compare-cell">Old way</div>
+        <div class="compare-cell">With Eden</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Lead visibility</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Scattered across portals, spreadsheets, and inboxes</div>
+        <div class="compare-cell new"><span class="mark">✓</span>One dashboard, every source, one view</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Lead quality reaching agents</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Agents call raw, unscored contacts and guess who's worth their time</div>
+        <div class="compare-cell new"><span class="mark">✓</span>Every lead is qualified through dedicated forms and AI-led conversations before an agent ever sees it</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Response time</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Whenever an agent gets to it</div>
+        <div class="compare-cell new"><span class="mark">✓</span>AI responds instantly, day or night</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Follow-up ownership</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Falls on whoever remembers to do it</div>
+        <div class="compare-cell new"><span class="mark">✓</span>Owned by the system, every time</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Old &amp; dead leads</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Sitting untouched in the CRM</div>
+        <div class="compare-cell new"><span class="mark">✓</span>Actively reactivated on a schedule</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Marketing ROI</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Content and ads disconnected from the pipeline</div>
+        <div class="compare-cell new"><span class="mark">✓</span>Every piece tied back to booked appointments</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell label">Visibility for the owner</div>
+        <div class="compare-cell old"><span class="mark">✗</span>Guessing which vendor is actually working</div>
+        <div class="compare-cell new"><span class="mark">✓</span>One dashboard shows what's producing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. THE SYSTEM -->
+<section id="system">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The system</span>
+      <h2>Six components. One system.</h2>
+      <p>Everything a brokerage needs to turn a lead into a closed deal — built as one connected system, not six separate tools.</p>
+    </div>
+
+    <div class="system-grid reveal-stagger">
+      <div class="sys-card">
+        <div class="num">01</div>
+        <h3>Unified Intake</h3>
+        <p>Every lead source — Zillow, Meta, your website, referrals — flows into one place instead of five disconnected inboxes.</p>
+      </div>
+      <div class="sys-card">
+        <div class="num">02</div>
+        <h3>AI ISA</h3>
+        <p>An AI-run inside sales agent qualifies every lead the moment it arrives — through dedicated qualification forms and live AI-led conversations, day or night. Your team never calls a raw, unscored contact — every lead reaching them has already been vetted.</p>
+      </div>
+      <div class="sys-card">
+        <div class="num">03</div>
+        <h3>Route &amp; Book</h3>
+        <p>Qualified leads are routed to the right agent and booked directly onto the calendar — no manual handoff required.</p>
+      </div>
+      <div class="sys-card">
+        <div class="num">04</div>
+        <h3>Nurture &amp; Reactivation</h3>
+        <p>Leads that aren't ready yet get worked on a long-term cadence instead of disappearing into a dead CRM.</p>
+      </div>
+      <div class="sys-card">
+        <div class="num">05</div>
+        <h3>Content OS</h3>
+        <p>Content and campaigns are built with a direct line back to the pipeline, not run as a disconnected side project.</p>
+      </div>
+      <div class="sys-card">
+        <div class="num">06</div>
+        <h3>Owner Dashboard</h3>
+        <p>One dashboard shows exactly where every lead stands and what's actually producing — no more guessing which vendor is working.</p>
+      </div>
+    </div>
+
+    <p class="system-close reveal">Most brokerages would need six different vendors — and six different bills — to piece together any of this. Eden runs it as one system, so <strong>client acquisition finally becomes consistent.</strong></p>
+  </div>
+</section>
+
+<!-- 6. WHY THIS WORKS -->
+<section id="credibility">
+  <div class="wrap">
+    <div class="credibility reveal">
+      <div class="mark-icon">”</div>
+      <blockquote>Eden isn't built by a software company guessing at real estate. It's built by a team that spent years running ads, ISAs, and lead conversion for brokerages <i>directly</i> — which is exactly how we saw the fragmentation problem up close, deal by deal, before we ever wrote a line of the system.</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 7. REAL RESULTS -->
+<section id="results">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Real results</span>
+      <h2>What the process produces</h2>
+    </div>
+
+    <!-- PLACEHOLDER NOTICE: Do not publish these numbers as real. Replace with actual case study data before launch. -->
+    <div class="results-note reveal">
+      ⚠ PLACEHOLDER DATA — these stat cards are structural mockups only. Replace [XX] values with confirmed case study numbers before this page goes live. Do not attribute AI-only results to periods run by a human team — attribute historical results to "the process, now AI-run."
+    </div>
+
+    <div class="results-grid reveal-stagger">
+      <div class="stat-card">
+        <span class="placeholder-tag">Placeholder</span>
+        <div class="stat-num">[XX]</div>
+        <div class="stat-desc">leads reactivated from dead CRM records</div>
+      </div>
+      <div class="stat-card">
+        <span class="placeholder-tag">Placeholder</span>
+        <div class="stat-num">[XX]</div>
+        <div class="stat-desc">appointments booked in [XX] days</div>
+      </div>
+      <div class="stat-card">
+        <span class="placeholder-tag">Placeholder</span>
+        <div class="stat-num">[XX]%</div>
+        <div class="stat-desc">improvement in [metric — e.g. response time]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section id="guarantee">
+  <div class="wrap">
+    <div class="guarantee-banner reveal">
+      <span class="guarantee-icon">Guarantee</span>
+      <div class="guarantee-copy">
+        <p>Your full system is live within <span class="num-30">30 days</span> of kickoff — the day you hand over access to your GHL and ad accounts, not the day you sign.</p>
+        <span class="guarantee-note">Covers delivery timeline only. Not a guarantee on lead volume, lead quality, or booked appointments.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. BONUS -->
+<section id="bonus">
+  <div class="wrap">
+    <div class="bonus-banner reveal">
+      <span class="bonus-icon">Bonus</span>
+      <p>Before your full system even launches, we spend the first <span class="num-14">14 days</span> reactivating the leads already sitting dead in your CRM.</p>
+    </div>
+    <div class="bonus-banner reveal">
+      <span class="bonus-icon">Bonus</span>
+      <p>While we build your full system over 30 days, we're already attracting new qualified prospects and booking them directly into your calendar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track-wrap">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-chip">Independent Brokerages</div>
+      <div class="marquee-chip">Multi-Office Franchises</div>
+      <div class="marquee-chip">Regional Teams</div>
+      <div class="marquee-chip">$500K–$10M+ GCI</div>
+      <div class="marquee-chip">Buyer &amp; Listing Teams</div>
+      <div class="marquee-chip">Growth-Stage Brokerages</div>
+      <!-- duplicated for seamless loop -->
+      <div class="marquee-chip">Independent Brokerages</div>
+      <div class="marquee-chip">Multi-Office Franchises</div>
+      <div class="marquee-chip">Regional Teams</div>
+      <div class="marquee-chip">$500K–$10M+ GCI</div>
+      <div class="marquee-chip">Buyer &amp; Listing Teams</div>
+      <div class="marquee-chip">Growth-Stage Brokerages</div>
+    </div>
+  </div>
+</div>
+
+<!-- 10. WHO THIS IS FOR -->
+<section id="fit">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto;">
+      <span class="eyebrow">Who this is for</span>
+      <h2>Is Eden a fit for your brokerage?</h2>
+    </div>
+
+    <div class="fit-grid reveal-stagger">
+      <div class="fit-card yes">
+        <h3><span class="mark">✓</span> You're a fit if</h3>
+        <ul>
+          <li><span class="mark">✓</span> You're doing roughly $500K–$10M+ in GCI</li>
+          <li><span class="mark">✓</span> Leads come from multiple sources you're juggling separately</li>
+          <li><span class="mark">✓</span> You already have a CRM, but it's underused or half-dead</li>
+          <li><span class="mark">✓</span> You've already tried lead vendors, training, or content — and it wasn't the fix</li>
+        </ul>
+      </div>
+      <div class="fit-card no">
+        <h3><span class="mark">→</span> Probably not yet if</h3>
+        <ul>
+          <li><span class="mark">→</span> You're a solo agent just starting out</li>
+          <li><span class="mark">→</span> You're looking for another lead vendor, not a system</li>
+          <li><span class="mark">→</span> You're not ready to run an AI-run layer on top of your team</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW (competitive urgency) -->
+<section id="why-now">
+  <div class="wrap">
+    <div class="why-now reveal">
+      <span class="eyebrow">Why now</span>
+      <h2>The brokerages moving first are building a real edge.</h2>
+      <p>AI adoption across real estate is accelerating — more teams are automating intake, qualification, and follow-up every quarter. That shift rewards whoever puts the system in place first: cleaner data, faster response habits, and a pipeline that's already compounding by the time it's the industry default. Waiting doesn't freeze the market in place — it just decides who gets the head start.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11. AVAILABILITY -->
+<section id="availability">
+  <div class="wrap">
+    <div class="availability reveal">
+      <span class="eyebrow">Availability</span>
+      <h2>We build by hand. That means we build a few.</h2>
+      <p style="color:var(--ink-dim); margin-top:16px; font-size:16px;">Each system is built and configured directly inside your account — not templated and mass-deployed. That's a real capacity constraint, not manufactured urgency.</p>
+      <div class="avail-count">
+        <span class="n">3</span>
+        <span class="t">new systems<br>built per month</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Common questions</span>
+      <h2>Before you book the call</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>We already have a CRM — do we need to switch?</span>
+          <span class="plus">+</span>
+        </div>
+        <div class="faq-a">No rip-and-replace. Eden plugs into your existing GoHighLevel account, or we set one up inside your own environment. Your CRM stays yours.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>We've tried AI tools before and it didn't help.</span>
+          <span class="plus">+</span>
+        </div>
+        <div class="faq-a">Most "AI tools" are one more disconnected piece bolted onto an already fragmented stack. Eden isn't a tool — it's the bridge that connects intake, qualification, routing, and reporting into a single system.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>How is this different from a marketing agency?</span>
+          <span class="plus">+</span>
+        </div>
+        <div class="faq-a">Agencies sell you pieces — ads, content, sometimes an ISA. Eden builds the connecting system once, so those pieces actually work together instead of living in separate inboxes and dashboards.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What if we're not actually a fit?</span>
+          <span class="plus">+</span>
+        </div>
+        <div class="faq-a">That's exactly what the call is for. We'll look at your lead sources, your current stack, and your GCI, and tell you directly if Eden makes sense right now.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Do we lose control of our CRM?</span>
+          <span class="plus">+</span>
+        </div>
+        <div class="faq-a">No. Everything runs inside your own GoHighLevel account. You keep ownership and access — Eden operates the system inside it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. FINAL CTA -->
+<section id="final-cta">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <span class="eyebrow">Get started</span>
+      <h2>See if your brokerage is a fit.</h2>
+      <p>Book a pipeline audit — a direct look at your lead sources, your current stack, and where Eden fits.</p>
+
+      <!-- GHL Calendar: "Strategy Session With EDEN" (calendar ID: eMDrsHSY1MYNLI1g6Jrn) -->
+      <div class="calendar-embed-wrap">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/booking/eMDrsHSY1MYNLI1g6Jrn"
+          style="width: 100%; border: none; overflow: hidden;"
+          scrolling="no"
+          id="eMDrsHSY1MYNLI1g6Jrn">
+        </iframe>
+      </div>
+      <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+    </div>
+  </div>
+</section>
+
+<!-- 14. FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="logo">
+          <img class="logo-mark" src="eden-logo.png" alt="Eden">
+          <span>Eden</span>
+        </div>
+        <p class="footer-tagline">AI operating systems for real estate teams &amp; brokerages.</p>
+      </div>
+      <div class="footer-right">
+        © <span id="year"></span> Eden.<br>
+        All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progressBar.style.width = scrolled + '%';
+  }, { passive: true });
+
+  // Mouse-tracked spotlight glow on cards
+  document.querySelectorAll('.preview-card, .cost-card, .sys-card, .stat-card, .fit-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+    });
+  });
+
+  // Nav scroll-spy
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const spySections = Array.from(navLinks)
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  spySections.forEach(s => navObserver.observe(s));
+</script>
+
+</body>
+</html>
