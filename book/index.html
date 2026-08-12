@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eden — Grab a Time</title>
-<meta name="description" content="Book your strategy session with Eden.">
+<title>Eden — Book Your Strategy Session</title>
+<meta name="description" content="You're one step away. Pick a time for your Eden strategy session.">
 <meta name="robots" content="noindex">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,6 @@
   :root {
     --bg: #0A0B08;
     --bg-raised: #101208;
-    --bg-card: #14160F;
     --border: rgba(245, 243, 236, 0.09);
     --border-strong: rgba(245, 243, 236, 0.16);
     --gold: #D6A544;
@@ -28,9 +27,7 @@
     --sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     --mono: 'IBM Plex Mono', ui-monospace, monospace;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: var(--bg);
     color: var(--ink);
@@ -39,7 +36,6 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-
   body::before {
     content: '';
     position: fixed;
@@ -50,100 +46,91 @@
     pointer-events: none;
     z-index: 0;
   }
-
   .wrap { max-width: 700px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; }
 
-  h1 { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -0.01em; line-height: 1.15; }
-  a { color: inherit; }
+  header { padding: 40px 0 10px; text-align: center; }
+  .logo-mark { width: 52px; height: 52px; object-fit: contain; }
 
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--green);
+  .status {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(74,122,90,0.14);
     border: 1px solid rgba(74,122,90,0.4);
-    background: rgba(74,122,90,0.12);
-    padding: 7px 14px 7px 11px;
+    padding: 7px 14px;
     border-radius: 999px;
+    margin-top: 8px;
   }
-  .eyebrow::before {
+  .status::before {
     content: '';
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--green);
-    display: inline-block;
   }
 
-  header { padding: 28px 0; text-align: center; }
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 22px;
-  }
-  .logo-mark { width: 32px; height: 32px; object-fit: contain; }
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero h1 { font-size: clamp(30px, 5vw, 44px); margin-top: 16px; }
+  .hero h1 i { color: var(--gold); }
+  .hero p { color: var(--ink-dim); font-size: 16px; max-width: 520px; margin: 16px auto 0; }
 
-  .confirm { text-align: center; padding: 20px 0 36px; position: relative; z-index: 1; }
-  .confirm h1 { font-size: clamp(32px, 5.5vw, 48px); margin-top: 18px; }
-  .confirm p { color: var(--ink-dim); font-size: 17px; max-width: 520px; margin: 16px auto 0; line-height: 1.6; }
-
+  section { padding: 32px 0 56px; position: relative; z-index: 1; }
   .calendar-embed-wrap {
-    margin: 0 auto 60px;
+    margin: 0 auto;
     max-width: 640px;
     background: var(--bg-raised);
     border: 1px solid var(--border-strong);
     border-radius: 18px;
     overflow: hidden;
-    position: relative;
-    z-index: 1;
   }
   .calendar-embed-wrap iframe { display: block; min-height: 850px; }
-  @media (max-width: 560px) { .calendar-embed-wrap iframe { min-height: 1050px; } }
+  @media (max-width: 560px) {
+    .calendar-embed-wrap iframe { min-height: 1050px; }
+  }
 
-  footer { padding: 0 0 40px; text-align: center; position: relative; z-index: 1; }
-  .footer-tagline { color: var(--ink-faint); font-size: 12.5px; margin-top: 8px; }
+  footer { border-top: 1px solid var(--border); padding: 28px 0; text-align: center; }
+  footer p { color: var(--ink-faint); font-size: 12.5px; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
+  <div class="wrap">
     <img class="logo-mark" src="../eden-logo.png" alt="Eden">
-    <span>Eden</span>
+    <div><span class="status">You're almost in</span></div>
   </div>
 </header>
 
-<div class="confirm">
+<section class="hero">
   <div class="wrap">
-    <span class="eyebrow">You're in</span>
-    <h1>Grab a time that works.</h1>
-    <p>Pick a slot below for your strategy session — we'll look at your lead sources, your current stack, and where Eden fits.</p>
+    <h1>Pick a time. <i>That's it.</i></h1>
+    <p>Thanks for sharing a bit about your brokerage. Grab a spot below for your strategy session with Eden.</p>
   </div>
-</div>
+</section>
 
-<!-- GHL Calendar: "Strategy Session With EDEN" (calendar ID: eMDrsHSY1MYNLI1g6Jrn) -->
-<div class="calendar-embed-wrap">
-  <iframe
-    src="https://api.leadconnectorhq.com/widget/booking/eMDrsHSY1MYNLI1g6Jrn"
-    style="width: 100%; border: none; overflow: hidden;"
-    scrolling="no"
-    id="eMDrsHSY1MYNLI1g6Jrn">
-  </iframe>
-</div>
+<section>
+  <div class="wrap">
+    <!-- GHL Calendar: "Strategy Session With EDEN" (calendar ID: eMDrsHSY1MYNLI1g6Jrn) -->
+    <div class="calendar-embed-wrap">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/booking/eMDrsHSY1MYNLI1g6Jrn"
+        style="width: 100%; border: none; overflow: hidden;"
+        scrolling="no"
+        id="eMDrsHSY1MYNLI1g6Jrn">
+      </iframe>
+    </div>
+  </div>
+</section>
+
 <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
 <footer>
-  <div class="logo">
-    <img class="logo-mark" src="../eden-logo.png" alt="Eden">
-    <span>Eden</span>
-  </div>
-  <p class="footer-tagline">AI operating systems for real estate teams &amp; brokerages.</p>
+  <p>AI operating systems for real estate teams &amp; brokerages.</p>
 </footer>
 
 </body>
