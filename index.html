@@ -870,6 +870,8 @@
   .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
   .footer-tagline { color: var(--ink-faint); font-size: 13.5px; max-width: 320px; margin-top: 10px; }
   .footer-right { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); text-align: right; }
+  .footer-right a { text-decoration: underline; transition: color 0.2s ease; }
+  .footer-right a:hover { color: var(--gold); }
 
   ::selection { background: var(--gold); color: #17140A; }
 </style>
@@ -1335,7 +1337,8 @@
       </div>
       <div class="footer-right">
         © <span id="year"></span> Eden.<br>
-        All rights reserved.
+        All rights reserved.<br>
+        <a href="/privacy/">Privacy Policy</a>
       </div>
     </div>
   </div>
