@@ -147,26 +147,27 @@
   .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   @media (max-width: 720px) { .testimonial-grid { grid-template-columns: 1fr; } }
   .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     background: var(--bg-card);
-    border: 1px dashed var(--border-strong);
+    border: 1px solid var(--border-strong);
     border-radius: 16px;
     padding: 24px;
-    color: var(--ink-faint);
-    font-family: var(--mono);
-    font-size: 11.5px;
-    line-height: 1.7;
-    text-align: center;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .testimonial-card .tag {
-    display: inline-block;
-    color: var(--gold);
-    background: var(--gold-soft);
-    padding: 3px 8px;
-    border-radius: 6px;
+  .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px -26px rgba(214,165,68,0.3); }
+  .testimonial-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; }
+  .testimonial-quote { color: var(--ink-dim); font-size: 13.5px; line-height: 1.65; flex-grow: 1; }
+  .testimonial-attribution { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .testimonial-name { font-weight: 700; font-size: 13px; color: var(--ink); }
+  .testimonial-source {
+    font-family: var(--mono);
     font-size: 9.5px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 12px;
+    color: var(--ink-faint);
   }
 
   /* Form section */
@@ -230,21 +231,33 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">What teams are saying</span>
-      <h2>Real feedback, coming soon.</h2>
+      <h2>Real feedback from real clients.</h2>
     </div>
-    <!-- TESTIMONIAL PLACEHOLDERS: do not publish as real. Replace with confirmed, permitted client quotes only. -->
+    <!-- Real Google reviews (edenmtl.com Google Business listing), lightly edited for brevity and to attribute to Eden rather than an individual. Source quotes on file. -->
     <div class="testimonial-grid">
       <div class="testimonial-card">
-        <span class="tag">Placeholder</span><br>
-        [ Client quote pending confirmed permission to use ]
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Eden's team is fantastic—always supportive, responsive, and truly invested in helping their clients succeed. Their professionalism and dedication make a real difference, and I highly recommend them!"</p>
+        <div class="testimonial-attribution">
+          <span class="testimonial-name">Ana Evasin</span>
+          <span class="testimonial-source">Google Review</span>
+        </div>
       </div>
       <div class="testimonial-card">
-        <span class="tag">Placeholder</span><br>
-        [ Client quote pending confirmed permission to use ]
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"As a broker, I get many phone calls from marketers, but by the end of my first conversation I could tell Eden was different. Their generosity, willingness to exchange ideas, and technical knowledge really impressed me. The results have been amazing, and I look forward to a long relationship as we tweak and optimize our campaigns."</p>
+        <div class="testimonial-attribution">
+          <span class="testimonial-name">Peter Bowering</span>
+          <span class="testimonial-source">Google Review</span>
+        </div>
       </div>
       <div class="testimonial-card">
-        <span class="tag">Placeholder</span><br>
-        [ Client quote pending confirmed permission to use ]
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"As a real estate agent with so many tasks to manage, I'm really thankful to Eden for helping me set up my ads and connect them to my landing page to generate more leads. They shared excellent ideas tailored to real estate marketing and explained everything in detail. I highly recommend them to any realtor or business owner looking to grow through marketing and ads."</p>
+        <div class="testimonial-attribution">
+          <span class="testimonial-name">Sergei Dvortcov</span>
+          <span class="testimonial-source">Google Review</span>
+        </div>
       </div>
     </div>
   </div>
