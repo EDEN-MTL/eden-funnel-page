@@ -120,26 +120,77 @@
     overflow: hidden;
     box-shadow: 0 30px 70px -40px rgba(214,165,68,0.25);
   }
-  .vsl-placeholder {
+  .vsl-thumb {
+    position: absolute;
+    inset: 0;
+    padding: 28px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    color: var(--ink-faint);
+    gap: 10px;
+    background:
+      radial-gradient(ellipse 500px 300px at 20% 0%, rgba(214,165,68,0.12), transparent 60%),
+      var(--bg-card);
+  }
+  .vsl-thumb-row { display: flex; gap: 10px; }
+  .vsl-thumb-chip {
     font-family: var(--mono);
-    font-size: 12px;
-    text-align: center;
-    padding: 20px;
+    font-size: 10px;
+    color: var(--ink-faint);
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+  }
+  .vsl-thumb-bar { flex: 1; height: 6px; border-radius: 4px; background: rgba(245,243,236,0.08); overflow: hidden; }
+  .vsl-thumb-bar span { display: block; height: 100%; border-radius: 4px; }
+  .vsl-thumb-stat {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+  }
+  .vsl-thumb-stat div {
+    flex: 1;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .vsl-thumb-stat b { display: block; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--gold); }
+  .vsl-thumb-stat small { font-family: var(--mono); font-size: 9px; color: var(--ink-faint); }
+  .vsl-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10,11,8,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .vsl-play {
-    width: 64px; height: 64px;
+    width: 72px; height: 72px;
     border-radius: 50%;
     background: var(--gold-soft);
-    border: 1px solid rgba(214,165,68,0.4);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(214,165,68,0.5);
     display: flex; align-items: center; justify-content: center;
     color: var(--gold);
-    font-size: 22px;
+    font-size: 24px;
+    box-shadow: 0 0 0 10px rgba(214,165,68,0.08);
   }
+
+  /* How It Works */
+  .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 720px) { .steps-grid { grid-template-columns: 1fr; } }
+  .step-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .step-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .step-num { font-family: var(--mono); font-size: 12px; color: var(--gold); margin-bottom: 12px; }
+  .step-card h3 { font-family: var(--sans); font-style: normal; font-weight: 800; font-size: 16.5px; margin-bottom: 8px; }
+  .step-card p { color: var(--ink-dim); font-size: 13.5px; line-height: 1.65; }
 
   /* Testimonials */
   .section-head { text-align: center; margin-bottom: 32px; }
@@ -168,6 +219,49 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-faint);
+  }
+
+  /* The Math — cost comparison */
+  .compare-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 780px) { .compare-cols { grid-template-columns: 1fr; } }
+  .compare-col {
+    position: relative;
+    border-radius: 16px;
+    padding: 26px 22px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    opacity: 0.65;
+  }
+  .compare-col h3 { font-family: var(--sans); font-style: normal; font-weight: 800; font-size: 17px; margin-bottom: 16px; color: var(--ink); }
+  .compare-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .compare-col li { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+  .compare-col.winner {
+    opacity: 1;
+    background: var(--bg-raised);
+    border-color: rgba(214,165,68,0.5);
+    box-shadow: 0 24px 60px -30px rgba(214,165,68,0.45);
+  }
+  .compare-col.winner h3 { color: var(--gold); }
+  .compare-col.winner li { color: var(--ink); }
+  .compare-col .winner-badge {
+    position: absolute;
+    top: -12px; right: 18px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #17140A;
+    background: var(--gold);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .compare-close {
+    text-align: center;
+    margin-top: 28px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 2.4vw, 22px);
+    color: var(--ink);
   }
 
   /* Form section */
@@ -211,17 +305,72 @@
   <div class="wrap">
     <span class="eyebrow">AI-run client acquisition for real estate teams &amp; brokerages</span>
     <h1>Stop paying for leads. <br><i>Start closing clients.</i></h1>
-    <p>Watch how Eden replaces your lead gen agencies, ISA services, and disconnected tools with one AI-run system — then see if your market is still available.</p>
+    <p>See how real estate teams are getting qualified buyer and seller appointments every week — without Zillow, without hiring ISAs, and without paying agencies thousands a month.</p>
   </div>
 </section>
 
 <section id="vsl">
   <div class="wrap">
     <div class="vsl-wrap">
-      <!-- VSL PLACEHOLDER: replace with real hosted video embed (e.g. Wistia/Vimeo/YouTube iframe or GHL video widget) -->
-      <div class="vsl-placeholder">
+      <!--
+        VSL: once the video is recorded, replace this entire .vsl-wrap div with a real embed, e.g.:
+        <div class="vsl-wrap"><iframe src="https://player.vimeo.com/video/XXXXXXX" style="width:100%;height:100%;border:none;" allow="autoplay; fullscreen"></iframe></div>
+        (Loom/Wistia/YouTube all work the same way — just swap the iframe src.)
+        Until then, this is a static dashboard-style thumbnail with a play button overlay so the page doesn't look unfinished.
+      -->
+      <div class="vsl-thumb">
+        <div class="vsl-thumb-row">
+          <span class="vsl-thumb-chip">Zillow</span>
+          <span class="vsl-thumb-chip">Meta Ads</span>
+          <span class="vsl-thumb-chip">Referrals</span>
+        </div>
+        <div class="vsl-thumb-row">
+          <div class="vsl-thumb-bar"><span style="width:88%; background: var(--ink-faint);"></span></div>
+        </div>
+        <div class="vsl-thumb-row">
+          <div class="vsl-thumb-bar"><span style="width:61%; background: var(--green);"></span></div>
+        </div>
+        <div class="vsl-thumb-row">
+          <div class="vsl-thumb-bar"><span style="width:34%; background: var(--gold);"></span></div>
+        </div>
+        <div class="vsl-thumb-stat">
+          <div><b>12X</b><small>EST. ROAS</small></div>
+          <div><b>10 sec</b><small>RESPONSE TIME</small></div>
+        </div>
+      </div>
+      <div class="vsl-overlay">
         <div class="vsl-play">▶</div>
-        [ VSL PLACEHOLDER — replace with hosted video embed ]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>From ad to appointment — on autopilot.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Your listings, your ads</h3>
+        <p>We build a listing page connected to your MLS and run targeted ads in your market. Buyers see real homes and raise their hand.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Instant response</h3>
+        <p>Every lead gets a call and text within seconds — not hours, not the next day. Our AI qualifies them: timeline, budget, pre-approval, what they're looking for.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Appointments on your calendar</h3>
+        <p>Qualified leads are booked directly onto your agents' calendars with a full brief attached. Your agent walks in knowing everything.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Nothing falls through the cracks</h3>
+        <p>Leads who aren't ready yet get nurtured automatically. When they re-engage, the system picks them back up and qualifies again.</p>
       </div>
     </div>
   </div>
@@ -231,7 +380,7 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">What teams are saying</span>
-      <h2>Real feedback from real clients.</h2>
+      <h2>Real feedback from real estate professionals.</h2>
     </div>
     <!-- Real Google reviews (edenmtl.com Google Business listing), lightly edited for brevity and to attribute to Eden rather than an individual. Source quotes on file. -->
     <div class="testimonial-grid">
@@ -260,6 +409,46 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="the-math">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The math</span>
+      <h2>What you're paying now vs. what you could be paying.</h2>
+    </div>
+    <div class="compare-cols">
+      <div class="compare-col">
+        <h3>Zillow Flex</h3>
+        <ul>
+          <li>35–40% of your commission on every closing</li>
+          <li>~$5,000 gone on a single $400K deal</li>
+          <li>You never own the leads</li>
+          <li>Stop paying, leads stop</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <h3>Traditional Agency</h3>
+        <ul>
+          <li>$2,000+/month retainer</li>
+          <li>Plus ad spend on top</li>
+          <li>Can't trace leads to closings</li>
+          <li>Stop paying, leads stop</li>
+        </ul>
+      </div>
+      <div class="compare-col winner">
+        <span class="winner-badge">Best choice</span>
+        <h3>EDEN</h3>
+        <ul>
+          <li>One system built for your team</li>
+          <li>AI responds to every lead in seconds</li>
+          <li>Qualified appointments on your calendar</li>
+          <li>You own your pipeline</li>
+        </ul>
+      </div>
+    </div>
+    <p class="compare-close">After your first one or two closings, the system has already paid for itself.</p>
   </div>
 </section>
 
