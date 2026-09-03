@@ -64,6 +64,22 @@
   h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; }
   a { color: inherit; }
 
+  .top-banner {
+    background: linear-gradient(90deg, rgba(214,165,68,0.14), rgba(74,122,90,0.14));
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    position: relative;
+    z-index: 100;
+  }
+  .top-banner a { color: var(--gold); border-bottom: 1px solid rgba(214,165,68,0.4); padding-bottom: 1px; }
+  .top-banner a:hover { border-color: var(--gold); }
+  .top-banner strong { color: var(--gold); }
+
   header {
     padding: 40px 0 20px;
     text-align: center;
@@ -317,6 +333,10 @@
 </style>
 </head>
 <body>
+
+<div class="top-banner">
+  <div class="wrap">See if you qualify for <strong>$2,000 in free ad spend</strong> — <a href="#apply">check availability</a></div>
+</div>
 
 <header>
   <div class="wrap">
