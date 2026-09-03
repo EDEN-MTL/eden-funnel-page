@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eden — Watch Before Your Call</title>
+<meta name="description" content="A quick must-watch video and answers to the most common questions, before your Eden strategy session.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0A0B08;
+    --bg-raised: #101208;
+    --bg-card: #14160F;
+    --border: rgba(245, 243, 236, 0.09);
+    --border-strong: rgba(245, 243, 236, 0.16);
+    --gold: #D6A544;
+    --gold-soft: rgba(214, 165, 68, 0.12);
+    --green: #4A7A5A;
+    --green-soft: rgba(74, 122, 90, 0.14);
+    --ink: #F5F3EC;
+    --ink-dim: rgba(245, 243, 236, 0.64);
+    --ink-faint: rgba(245, 243, 236, 0.4);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(214,165,68,0.14), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 10%, rgba(74,122,90,0.14), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; }
+  a { color: inherit; }
+
+  header { padding: 40px 0 10px; text-align: center; }
+  .logo-mark { width: 52px; height: 52px; object-fit: contain; }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(214,165,68,0.14);
+    border: 1px solid rgba(214,165,68,0.4);
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-top: 8px;
+  }
+  .status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(214,165,68,0.45); }
+    70% { box-shadow: 0 0 0 6px rgba(214,165,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(214,165,68,0); }
+  }
+
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero h1 { font-size: clamp(30px, 5vw, 46px); margin-top: 16px; }
+  .hero h1 i { color: var(--gold); }
+  .hero p { color: var(--ink-dim); font-size: 16px; max-width: 560px; margin: 16px auto 0; line-height: 1.6; }
+
+  section { padding: 28px 0 48px; position: relative; z-index: 1; }
+
+  /* Video */
+  .vsl-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 30px 70px -40px rgba(214,165,68,0.25);
+  }
+  .vsl-wrap iframe, .vsl-wrap video { width: 100%; height: 100%; border: none; display: block; }
+  .vsl-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    color: var(--ink-faint);
+    font-family: var(--mono);
+    font-size: 12px;
+    text-align: center;
+    padding: 20px;
+  }
+  .vsl-play {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    border: 1px solid rgba(214,165,68,0.4);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-size: 22px;
+  }
+  .required-note {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin-top: 14px;
+  }
+
+  /* FAQ */
+  .section-head { text-align: center; margin-bottom: 28px; }
+  .section-head h2 { font-size: clamp(26px, 4vw, 34px); margin-top: 14px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(214,165,68,0.32);
+    background: rgba(214,165,68,0.07);
+    padding: 7px 14px 7px 11px;
+    border-radius: 999px;
+  }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .faq-item:hover { border-color: var(--border-strong); }
+  .faq-item.open { border-color: rgba(214,165,68,0.4); box-shadow: 0 16px 40px -22px rgba(214,165,68,0.4); }
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    transition: color 0.25s ease;
+  }
+  .faq-item.open .faq-q { color: var(--gold); }
+  .faq-q .plus { font-family: var(--mono); color: var(--gold); font-size: 20px; transition: transform 0.3s ease; flex-shrink: 0; }
+  .faq-item.open .faq-q .plus { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 24px;
+    color: var(--ink-dim);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .faq-item.open .faq-a { max-height: 420px; padding: 0 24px 22px; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+  }
+  footer .logo-mark { width: 34px; height: 34px; }
+  footer p { color: var(--ink-faint); font-size: 12.5px; margin-top: 10px; }
+  footer a { color: var(--ink-faint); text-decoration: underline; transition: color 0.2s ease; }
+  footer a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="logo-mark" src="../eden-logo.png" alt="Eden">
+    <div><span class="status">Watch before your call</span></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Before your call, <i>watch this.</i></h1>
+    <p>This short video covers exactly how Eden works and what to expect — we'll also send you this link by email. Please watch it before your session so we can make the most of our time together.</p>
+  </div>
+</section>
+
+<section id="vsl">
+  <div class="wrap">
+    <div class="vsl-wrap">
+      <!--
+        VIDEO PLACEHOLDER — swap for the real embed once recorded.
+        Loom example:  <iframe src="https://www.loom.com/embed/VIDEO_ID" allowfullscreen></iframe>
+        Wistia example: <iframe src="https://fast.wistia.net/embed/iframe/VIDEO_ID" allowfullscreen></iframe>
+        Vimeo example:  <iframe src="https://player.vimeo.com/video/VIDEO_ID" allowfullscreen></iframe>
+        Until then, replace this block with a static thumbnail image of the Eden dashboard + play button overlay
+        so the page doesn't look unfinished (e.g. <img src="thumbnail.jpg"> behind the .vsl-play button below).
+      -->
+      <div class="vsl-placeholder">
+        <div class="vsl-play">▶</div>
+        [ VIDEO PLACEHOLDER — replace with hosted video embed (Loom/Wistia/Vimeo) ]
+      </div>
+    </div>
+    <p class="required-note">This video is required viewing before your strategy session.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Common questions</span>
+      <h2>Before you get on the call</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span>What if it doesn't work for my market?</span><span class="plus">+</span></div>
+        <div class="faq-a">That's exactly why we only take 4 teams a month — one per market. We're not mass-producing this. It's built around your specific listings, your area, and your agents' availability.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>I've tried AI chatbots before and they were useless.</span><span class="plus">+</span></div>
+        <div class="faq-a">This isn't a chatbot on your website hoping someone types a question. This is outbound — it calls people, texts people, follows up like a real ISA would, except it never sleeps and never quits.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>How do I know the leads will actually be good?</span><span class="plus">+</span></div>
+        <div class="faq-a">Every lead gets graded before your agents see it. You're not getting a pile of names — you're getting a short list of pre-qualified, graded appointments.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>What if my agents don't trust leads from an AI system?</span><span class="plus">+</span></div>
+        <div class="faq-a">Every appointment comes with a full brief — who the person is, their budget, their timeline, what they're looking for. Your agents walk in more prepared than they would with a typical lead handoff from a human ISA.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>This sounds expensive.</span><span class="plus">+</span></div>
+        <div class="faq-a">Compare it to what you're already spending. Zillow Flex takes 35-40% of your commission per closing — on a single $400K deal that's around $5,000 gone. An agency retainer alone is $24,000 a year, and you still don't own anything. When we go through your numbers on the call, you'll see it stacks up well against what you're already paying for something that isn't even working as hard for you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>What if I sign up and it just doesn't perform?</span><span class="plus">+</span></div>
+        <div class="faq-a">There's no long-term contract. And remember — we're the ones funding your first $2,000 in ads. We have as much reason to make this work as you do.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>How much time is this going to take from me or my agents?</span><span class="plus">+</span></div>
+        <div class="faq-a">Almost none. We build it, we run it, we optimize it. Your agents' only job is showing up to appointments that are already booked and qualified.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Why should I trust a company I've never heard of over an established platform like Zillow?</span><span class="plus">+</span></div>
+        <div class="faq-a">We've worked with over 100 agents and teams across real estate, so this isn't our first run at solving this problem. And Zillow's business model depends on you staying dependent on them — ours depends on the system actually working, because we only get paid monthly if you keep us around, and you can walk away anytime since you own everything. It's already working on this specific system too — one team's agents are averaging an extra deal a month each since going live, and another added $30,000 in GCI in their first four months.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>What happens after the 4 September spots are gone?</span><span class="plus">+</span></div>
+        <div class="faq-a">We reopen in October, but the pricing and the funded ad spend offer may not be the same — this specific offer is tied to the September batch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img class="logo-mark" src="../eden-logo.png" alt="Eden">
+  <p>AI operating systems for real estate teams &amp; brokerages.</p>
+  <p><a href="/privacy/">Privacy Policy</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
