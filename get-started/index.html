@@ -308,6 +308,32 @@
   }
   .funded-banner p { color: var(--ink); font-size: 14.5px; line-height: 1.6; margin: 0; }
   .funded-amount { color: var(--gold); font-weight: 700; }
+
+  /* Closing CTA */
+  .closing-cta-inner {
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 44px 32px;
+  }
+  .closing-cta-inner h2 { font-size: clamp(24px, 3.6vw, 32px); }
+  .closing-cta-inner p { color: var(--ink-dim); margin-top: 10px; font-size: 15px; }
+  .closing-cta-btn {
+    display: inline-block;
+    margin-top: 22px;
+    background: var(--gold);
+    color: #17140A;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 26px -12px rgba(214,165,68,0.6);
+  }
+  .closing-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 36px -10px rgba(214,165,68,0.7); }
   .form-embed-wrap {
     margin: 32px auto 0;
     max-width: 560px;
@@ -364,6 +390,40 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="wrap">
+    <div class="form-lead">
+      <span class="eyebrow">Limited availability</span>
+      <h2>See if your market is available.</h2>
+      <p>We're only taking on <strong>4 teams this month</strong> — one per market. Fill this out to find out if your market and your spot are still open.</p>
+    </div>
+
+    <div class="funded-banner">
+      <span class="funded-tag">Bonus</span>
+      <p>We'll front the first <span class="funded-amount">$2,000</span> in ad spend for your account — so you see real leads coming in before you've spent a dollar of your own on ads.</p>
+    </div>
+
+    <!-- GHL Form: "See if your Market is Still Available" (form ID: LDC6AQwrZ1JgEqJIkMw3) -->
+    <!-- IMPORTANT: set this form's redirect/thank-you URL in GHL to /book/ so submitting sends them to the booking page -->
+    <div class="form-embed-wrap">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/LDC6AQwrZ1JgEqJIkMw3"
+        style="width: 100%; border: none; overflow: hidden;"
+        id="inline-LDC6AQwrZ1JgEqJIkMw3"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-activation-type="alwaysActivated"
+        data-deactivation-type="neverDeactivate"
+        data-form-name="See if your Market is Still Available"
+        data-height="640"
+        data-layout-iframe-id="inline-LDC6AQwrZ1JgEqJIkMw3"
+        data-form-id="LDC6AQwrZ1JgEqJIkMw3"
+        title="See if your Market is Still Available">
       </iframe>
     </div>
   </div>
@@ -476,36 +536,12 @@
   </div>
 </section>
 
-<section id="apply">
+<section id="closing-cta">
   <div class="wrap">
-    <div class="form-lead">
-      <span class="eyebrow">Limited availability</span>
-      <h2>See if your market is available.</h2>
-      <p>We're only taking on <strong>4 teams this month</strong> — one per market. Fill this out to find out if your market and your spot are still open.</p>
-    </div>
-
-    <div class="funded-banner">
-      <span class="funded-tag">Bonus</span>
-      <p>We'll front the first <span class="funded-amount">$2,000</span> in ad spend for your account — so you see real leads coming in before you've spent a dollar of your own on ads.</p>
-    </div>
-
-    <!-- GHL Form: "See if your Market is Still Available" (form ID: LDC6AQwrZ1JgEqJIkMw3) -->
-    <!-- IMPORTANT: set this form's redirect/thank-you URL in GHL to /book/ so submitting sends them to the booking page -->
-    <div class="form-embed-wrap">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/form/LDC6AQwrZ1JgEqJIkMw3"
-        style="width: 100%; border: none; overflow: hidden;"
-        id="inline-LDC6AQwrZ1JgEqJIkMw3"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-activation-type="alwaysActivated"
-        data-deactivation-type="neverDeactivate"
-        data-form-name="See if your Market is Still Available"
-        data-height="640"
-        data-layout-iframe-id="inline-LDC6AQwrZ1JgEqJIkMw3"
-        data-form-id="LDC6AQwrZ1JgEqJIkMw3"
-        title="See if your Market is Still Available">
-      </iframe>
+    <div class="closing-cta-inner">
+      <h2>Still scrolling? Your spot won't wait.</h2>
+      <p>4 teams a month, one per market. See if yours is still open.</p>
+      <a href="#apply" class="closing-cta-btn">See if your market is available ↑</a>
     </div>
   </div>
 </section>
