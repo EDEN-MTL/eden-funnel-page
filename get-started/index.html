@@ -202,9 +202,8 @@
     overflow: hidden;
     box-shadow: 0 30px 70px -40px rgba(214,165,68,0.25);
   }
-  .deck-viewport { overflow: hidden; height: 480px; }
-  @media (max-width: 720px) { .deck-viewport { height: 620px; } }
-  @media (max-width: 480px) { .deck-viewport { height: 775px; } }
+  /* Fallback height for first paint before JS measures the active slide and takes over — JS then sizes this to match each slide's actual content, so sparse and dense slides each get a box that fits them. */
+  .deck-viewport { overflow: hidden; height: 420px; transition: height 0.35s cubic-bezier(.65,0,.35,1); }
   .deck-track { display: flex; height: 100%; transition: transform 0.45s cubic-bezier(.65,0,.35,1); }
   .deck-slide {
     flex: 0 0 100%;
@@ -948,6 +947,7 @@
 <script>
   (function () {
     const track = document.getElementById('deckTrack');
+    const viewport = track ? track.parentElement : null;
     const dotsWrap = document.getElementById('deckDots');
     const counter = document.getElementById('deckCounter');
     const prevBtn = document.getElementById('deckPrev');
@@ -967,13 +967,43 @@
     });
     const dots = Array.from(dotsWrap.children);
 
+    // Measure a slide's true natural content height (independent of whatever
+    // height the shared viewport currently happens to be), so each slide can
+    // get a box sized to fit itself rather than every slide sharing one
+    // fixed height sized for the tallest/densest slide.
+    function getSlideContentHeight(slide) {
+      const children = Array.from(slide.children);
+      if (!children.length) return slide.scrollHeight;
+      const first = children[0].getBoundingClientRect();
+      const last = children[children.length - 1].getBoundingClientRect();
+      const contentSpan = last.bottom - first.top;
+      const cs = getComputedStyle(slide);
+      const vPad = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+      return Math.ceil(contentSpan + vPad);
+    }
+
+    function resizeViewport() {
+      if (!viewport) return;
+      const needed = getSlideContentHeight(slides[index]);
+      const ceiling = Math.max(500, window.innerHeight * 0.85);
+      const clamped = Math.max(240, Math.min(needed, ceiling));
+      viewport.style.height = clamped + 'px';
+    }
+
     function render() {
       track.style.transform = 'translateX(-' + (index * 100) + '%)';
       counter.textContent = (index + 1) + ' / ' + total;
       dots.forEach((d, i) => d.classList.toggle('active', i === index));
       prevBtn.disabled = index === 0;
       nextBtn.disabled = index === total - 1;
+      resizeViewport();
     }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resizeViewport, 120);
+    });
 
     function goTo(i) {
       index = Math.max(0, Math.min(total - 1, i));
