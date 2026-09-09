@@ -202,26 +202,38 @@
     overflow: hidden;
     box-shadow: 0 30px 70px -40px rgba(214,165,68,0.25);
   }
-  .deck-viewport { overflow: hidden; height: 560px; }
-  @media (max-width: 720px) { .deck-viewport { height: 640px; } }
-  @media (max-width: 480px) { .deck-viewport { height: 720px; } }
+  .deck-viewport { overflow: hidden; height: 480px; }
+  @media (max-width: 720px) { .deck-viewport { height: 620px; } }
+  @media (max-width: 480px) { .deck-viewport { height: 775px; } }
   .deck-track { display: flex; height: 100%; transition: transform 0.45s cubic-bezier(.65,0,.35,1); }
   .deck-slide {
     flex: 0 0 100%;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    padding: 40px 48px;
+    padding: 34px 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 14px;
     overflow-y: auto;
   }
-  @media (max-width: 720px) { .deck-slide { padding: 30px 24px; } }
+  @media (max-width: 720px) { .deck-slide { padding: 26px 22px; gap: 11px; } }
+  /* Mobile has less horizontal room, so text wraps into more lines — pull the desktop size bump back down to keep slides fitting without scrolling */
+  @media (max-width: 720px) {
+    .deck-title { font-size: clamp(20px, 4.8vw, 25px); }
+    .deck-body { font-size: 14.5px; line-height: 1.6; }
+    .deck-card { padding: 14px 16px; }
+    .deck-card h4 { font-size: 14.5px; margin-bottom: 5px; }
+    .deck-card p { font-size: 12.5px; line-height: 1.5; }
+    .deck-list li { font-size: 13px; line-height: 1.5; }
+    .deck-fit-col li { font-size: 13px; line-height: 1.45; }
+    .deck-fit-col { padding: 13px 15px; }
+    .deck-fit-col h4 { font-size: 13px; margin-bottom: 7px; }
+  }
   .deck-slide .eyebrow { align-self: flex-start; }
-  .deck-title { font-size: clamp(22px, 3.2vw, 30px); margin-top: 4px; }
-  .deck-body { color: var(--ink-dim); font-size: 14.5px; line-height: 1.7; }
+  .deck-title { font-size: clamp(23px, 3.4vw, 32px); margin-top: 4px; }
+  .deck-body { color: var(--ink-dim); font-size: 16px; line-height: 1.75; }
   .deck-note {
     font-family: var(--mono);
     font-size: 11px;
@@ -269,9 +281,9 @@
 
   /* Deck content helpers */
   .deck-stats { display: flex; gap: 12px; flex-wrap: wrap; }
-  .deck-stat { flex: 1; min-width: 120px; background: var(--bg-raised); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
-  .deck-stat b { display: block; font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--gold); }
-  .deck-stat span { font-size: 12px; color: var(--ink-dim); line-height: 1.4; }
+  .deck-stat { flex: 1; min-width: 120px; background: var(--bg-raised); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; }
+  .deck-stat b { display: block; font-family: var(--serif); font-style: italic; font-size: 27px; color: var(--gold); }
+  .deck-stat span { font-size: 13px; color: var(--ink-dim); line-height: 1.45; }
   @media (max-width: 480px) {
     .deck-stat { min-width: 0; padding: 10px 10px; }
     .deck-stat b { font-size: 18px; }
@@ -279,34 +291,40 @@
   }
 
   .deck-founder { display: flex; gap: 20px; align-items: center; }
-  .deck-founder img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(214,165,68,0.4); flex-shrink: 0; }
+  .deck-founder img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(214,165,68,0.4); flex-shrink: 0; }
   .deck-founder h3 { font-family: var(--sans); font-weight: 800; font-size: 17px; }
   .deck-founder p { color: var(--ink-faint); font-size: 12.5px; font-family: var(--mono); }
 
   .deck-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  @media (max-width: 720px) { .deck-cards { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .deck-cards { gap: 8px; } }
+  @media (max-width: 480px) { .deck-cards { gap: 6px; } }
   .deck-cards.cols-3 { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 720px) { .deck-cards.cols-3 { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
   @media (max-width: 480px) { .deck-cards.cols-3 { grid-template-columns: repeat(2, 1fr); gap: 6px; } }
-  .deck-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .deck-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
   .deck-card .num { font-family: var(--mono); font-size: 11px; color: var(--gold); margin-bottom: 6px; }
-  .deck-card h4 { font-family: var(--sans); font-weight: 800; font-size: 14.5px; margin-bottom: 6px; }
-  .deck-card p { color: var(--ink-dim); font-size: 12.5px; line-height: 1.55; }
+  .deck-card h4 { font-family: var(--sans); font-weight: 800; font-size: 15.5px; margin-bottom: 7px; }
+  .deck-card p { color: var(--ink-dim); font-size: 13.5px; line-height: 1.6; }
+  /* Dense grids (6 cards) stay compact at every width; sparser cols-3 grids (3 cards) keep the roomier base sizing */
+  .deck-cards.cols-3.dense .deck-card { padding: 12px 14px; }
+  .deck-cards.cols-3.dense .deck-card .num { font-size: 10.5px; margin-bottom: 4px; }
+  .deck-cards.cols-3.dense .deck-card h4 { font-size: 13.5px; margin-bottom: 4px; }
+  .deck-cards.cols-3.dense .deck-card p { font-size: 12px; line-height: 1.45; }
   @media (max-width: 480px) {
-    .deck-cards.cols-3 .deck-card { padding: 10px 12px; }
-    .deck-cards.cols-3 .deck-card .num { font-size: 10px; margin-bottom: 3px; }
-    .deck-cards.cols-3 .deck-card h4 { font-size: 12.5px; margin-bottom: 3px; }
-    .deck-cards.cols-3 .deck-card p { font-size: 11px; line-height: 1.4; }
+    .deck-cards.cols-3.dense .deck-card { padding: 10px 12px; }
+    .deck-cards.cols-3.dense .deck-card .num { font-size: 10px; margin-bottom: 3px; }
+    .deck-cards.cols-3.dense .deck-card h4 { font-size: 12.5px; margin-bottom: 3px; }
+    .deck-cards.cols-3.dense .deck-card p { font-size: 11px; line-height: 1.4; }
   }
 
   .deck-fit-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 720px) { .deck-fit-cols { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .deck-fit-cols { gap: 8px; } }
   .deck-fit-col { border-radius: 12px; padding: 16px 18px; border: 1px solid var(--border); }
   .deck-fit-col.yes { background: var(--green-soft); border-color: rgba(74,122,90,0.4); }
   .deck-fit-col.no { background: var(--bg-raised); }
   .deck-fit-col h4 { font-size: 13.5px; font-weight: 800; margin-bottom: 10px; }
   .deck-fit-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .deck-fit-col li { font-size: 12.5px; color: var(--ink-dim); line-height: 1.5; padding-left: 16px; position: relative; }
+  .deck-fit-col li { font-size: 13.5px; color: var(--ink-dim); line-height: 1.55; padding-left: 16px; position: relative; }
   .deck-fit-col.yes li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-family: var(--mono); }
   .deck-fit-col.no li::before { content: '→'; position: absolute; left: 0; color: var(--ink-faint); font-family: var(--mono); }
 
@@ -328,8 +346,12 @@
   .deck-table .no { color: #E8763A; }
   .deck-table .mid { color: var(--ink-faint); }
   .deck-cards .deck-list { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  @media (max-width: 720px) {
+    .deck-cards .deck-list { padding: 12px 14px; gap: 6px; }
+    .deck-cards .deck-list li { font-size: 11.5px; line-height: 1.4; }
+  }
   .deck-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin: 0; }
-  .deck-list li { font-size: 12.5px; color: var(--ink-dim); line-height: 1.55; padding-left: 15px; position: relative; }
+  .deck-list li { font-size: 14px; color: var(--ink-dim); line-height: 1.6; padding-left: 15px; position: relative; }
   .deck-list li::before { content: '•'; position: absolute; left: 0; color: var(--gold); }
 
   /* How It Works */
@@ -600,7 +622,7 @@
           <div class="deck-slide">
             <span class="eyebrow">The mechanism</span>
             <h2 class="deck-title">The EDEN System</h2>
-            <div class="deck-cards cols-3">
+            <div class="deck-cards cols-3 dense">
               <div class="deck-card"><div class="num">1</div><h4>Fund &amp; Launch Ads</h4><p>We launch hyper-targeted Meta ads in your market — and personally fund the first $2,000 of spend.</p></div>
               <div class="deck-card"><div class="num">2</div><h4>Instant AI Response</h4><p>Every lead gets a call and text back within seconds, 24/7. No lead sits overnight.</p></div>
               <div class="deck-card"><div class="num">3</div><h4>AI Qualification</h4><p>Our AI screens each lead on timeline, budget, pre-approval, and motivation before anyone touches your calendar.</p></div>
@@ -644,7 +666,7 @@
           <div class="deck-slide">
             <span class="eyebrow">What to expect</span>
             <h2 class="deck-title">What's the Realistic Timeline?</h2>
-            <div class="deck-cards cols-3">
+            <div class="deck-cards cols-3 dense">
               <div class="deck-card"><div class="num">Days 1-3</div><p>Onboarding call. We connect your ad accounts, CRM, and calendars, and configure the AI around your team.</p></div>
               <div class="deck-card"><div class="num">By Week 1</div><p>Ads go live in your market. AI response and qualification go live alongside them — leads start flowing in fast.</p></div>
               <div class="deck-card"><div class="num">Week 2</div><p>First leads live-transferred and booked directly onto your agents' calendars — not just names on a list.</p></div>
