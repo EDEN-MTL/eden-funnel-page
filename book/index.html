@@ -98,6 +98,31 @@
   footer a { color: var(--ink-faint); text-decoration: underline; transition: color 0.2s ease; }
   footer a:hover { color: var(--gold); }
 </style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2075698479609404');
+fbq('track', 'PageView');
+// Reaching /book/ means the qualifying form on /get-started/ was already
+// submitted and GHL redirected here — this is our first-party, reliable
+// Lead signal (independent of GHL's own cross-origin iframe pixel).
+fbq('track', 'Lead');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2075698479609404&ev=PageView&noscript=1"
+/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2075698479609404&ev=Lead&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
